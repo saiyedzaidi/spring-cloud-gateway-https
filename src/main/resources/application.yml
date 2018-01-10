@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+      # =====================================
+      - id: rewritepath_route
+        uri: http://localhost:8080
+        predicates:
+        - Path=/try/**
+        filters:
+        - RewritePath=/try/(?<segment>.*), /test
+server:
+  ssl:
+    key-alias: spring
+    enabled: true
+    key-password: spring
+    key-store: selfsigned.jks
+    key-store-type: JKS
+    key-store-provider: SUN
+    key-store-password: spring
